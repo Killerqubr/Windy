@@ -1,0 +1,157 @@
+/* --*- coding: utf-8 -*- */
+/* Windy Default样式表: Maple Red; Dark */
+
+/* 全局样式 */
+* {
+    font-family: "想念是枫糖海盐味", sans-serif;
+    font-size:17px;
+    color: white;
+}
+/* QStackedWidget */
+QStackedWidget {
+    background-color: #3a3a3a;
+}
+QWidget[Theme="Dark"] {
+    background-color: #242424;
+}
+
+/* QPushButton*/
+QPushButton {
+    outline: 0px;
+    border: 1px solid #bf514e;
+    background-color: transparent;
+    color: white;
+    border-radius: 12px;
+    padding: 8px;
+    min-height: 20px;
+    min-width: 20px;
+}
+QPushButton:hover {
+    background-color: rgba(191,81,78, 30);
+}
+QPushButton:pressed {
+    background-color: rgba(191,81,78, 100);
+}
+/* SingalShot样式的QPushButton */
+QPushButton#SingalShot {
+    border: none;
+    outline: 0px;
+    background-color: #bf514e;
+    color: white;
+    border-radius: 12px;
+    padding: 8px;
+}
+QPushButton#SingalShot:hover {
+    border: 1px solid white;
+}
+QPushButton#SingalShot:pressed {
+    background-color: rgba(191,81,78, 100);
+}
+QPushButton#SingalShot:disabled {
+    background-color: rgba(191, 81, 78, 40);
+    color:#a2a2a2
+}
+
+
+/* QComboBox */
+QComboBox {
+    background-color: #242424;
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 20px;
+}
+QComboBox:hover {
+    border: 1px solid #79716b;
+    padding: 9px;
+}
+QComboBox::drop-down{
+    border-style: none;
+    border:none;
+}
+QComboBox QAbstractItemView{
+    background-color: #242424;
+    border: 1px solid #bf514e;
+    border-radius: 10px;
+    padding: 3px;
+    outline: 0px;
+    
+}
+QComboBox QAbstractItemView::item{
+    min-height: 35px;
+    border-radius: 8px;
+}
+QComboBox QAbstractItemView::item:selected{
+    background-color: #242424;
+    border-radius: 8px;
+}
+QComboBox QAbstractItemView::item:hover{
+    background-color: rgba(191,81,78, 30);
+}
+QComboBox:disabled {
+    border: 1px solid #242424;
+    background-color: #333333;
+}
+
+/* QLineEdit */
+QLineEdit {
+    background-color: #242424;
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 20px;
+}
+QLineEdit:hover {
+    border: 1px solid #79716b;
+    padding: 9px;
+}
+QLineEdit:focus {
+    border: 2px solid #bf514e;
+    padding: 8px;
+}
+
+/* QScrollArea */
+QScrollArea {
+    background-color: #242424;
+    border-radius: 10px;
+    padding: 10px;
+}
+QScrollBar:vertical
+{
+    background: transparent;
+    width: 8px;
+}
+QScrollBar::handle:vertical
+{
+    background:#393939;
+    border-radius:4px;
+}
+QScrollBar::handle:vertical:hover {
+    background:rgba(191, 81, 78, 160);
+}
+QScrollBar::sub-page:vertical, QScrollBar::add-page:vertical {
+    border: none;
+    background: none;
+}
+QScrollBar::sub-line:vertical, QScrollBar::add-line:vertical {
+    border: none;
+    background: none;
+}
+
+
+QStatusBar {
+    background-color: #242424;
+    min-height: 25px;
+    color:#535353
+}
+
+PlotWidget {
+    background-color: #242424;
+    margin:0px
+}
+
+/* QGroupBox */
+QGroupBox {
+    font-size: 20px;
+}
+QGroupBox::title{
+    color: #bf514e
+}

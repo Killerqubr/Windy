@@ -1,0 +1,30 @@
+{
+    "StyleSheet": {
+        "Type": "ComboBox",
+        "Title": {
+            "zh-CN": "样式表",
+            "en-US": "StyleSheet"
+        },
+        "Info": "<font color=#ffffff>更改Windy的全局样式表<br><font color=#5e5e5e>此选项的更改将<font color=#00aaaa>立即生效</font><br><br>已知的错误: Menu的PushButton子组件只有重启才能更新样式",
+        "Items": [
+            "Dark",
+            "Dark_Pink"
+        ],
+        "Selected": "Dark_Pink",
+        "SelectedIndex": 1
+    },
+    "Language": {
+        "Type": "ComboBox",
+        "Title": {
+            "zh-CN": "语言",
+            "en-US": "Language"
+        },
+        "Info": "<font color=#00aaaa>未实现的功能<br><br><font color=#ffffff>更改程序语言<br><font color=#5e5e5e>此选项的更改将在重启后生效</font>",
+        "Items": [
+            "zh-CN",
+            "en-US"
+        ],
+        "Selected": "en-US",
+        "SelectedIndex": 1
+    }
+}
