@@ -7,9 +7,9 @@ from Widgets.VComboBox import VComboBox
 import Scripts
 import time
 
-def createHail(parent):
+def Hail(parent):
     "作者/页面设计 Killerqubr | 冰雹猜想计算器(炒冷饭说是)"
-    Hail = QWidget(parent)
+    Widget = QWidget(parent)
 
     def startup_Cal():
         if Flag_Accessable:
@@ -34,7 +34,7 @@ def createHail(parent):
             StatusBar.showMessage(f'计算时间{TElapsed:.0f}ms')
 
             "更改图表"
-            Timer = QTimer(Hail)
+            Timer = QTimer(Widget)
             Timer.setInterval(200)
 
             def Unlocker():
@@ -117,7 +117,7 @@ def createHail(parent):
         except ValueError:
             if HailInput.text() == '':
                 StatusBar.setStyleSheet("color:#b2b2b2")
-                MessageWouldShow = ['Tips: (拾起一颗冰雹)', 'Tips: 27是一个很神奇的数字..' 'Tips: 会不会有枫叶猜想呢? (想到了分形)', 'Tips: 从天而降, 砸中了你, 我不是故意~', 'Tips: 可不很可爱!', 'Tips: 负数的3N+1有不少循环体呢! 如-10>-5>-14>-7>-20>-10...']
+                MessageWouldShow = ['Tips: (catch到一颗冰雹)(threw掉了)', 'Tips: 27是一个很神奇的数字..' 'Tips: 会不会有枫叶猜想呢? (想到了分形)', 'Tips: 从天而降, 砸中了你, 我不是故意~', 'Tips: 负数的3N+1有不少循环体呢! 如-10>-5>-14>-7>-20>-10...']
                 StatusBar.showMessage(MessageWouldShow[randint(0,len(MessageWouldShow)-1)])
                 HailGraph.setTitle("冰雹计算器 | 版本1.0")
                 Failure()
@@ -131,7 +131,7 @@ def createHail(parent):
 
         Toolbar = QHBoxLayout()
         if True:
-            HailInput = QLineEdit(Hail)
+            HailInput = QLineEdit(Widget)
             HailInput.setPlaceholderText("试着输入一个整数...")
             HailInput.setMaxLength(309)
             HailInput.returnPressed.connect(startup_Cal)
@@ -143,7 +143,7 @@ def createHail(parent):
             HailGraph.setMouseEnabled(x=False, y=False) 
             HailGraph.setTitle("冰雹计算器 | 版本1.0")
 
-            ModeSelector = VComboBox(Hail)
+            ModeSelector = VComboBox(Widget)
             ModeSelector.addItem('脉冲')
             ModeSelector.addItem('动画化')
 
@@ -163,5 +163,6 @@ def createHail(parent):
     Layout.addWidget(HailGraph)
     Layout.addWidget(StatusBar)
 
-    Hail.setLayout(Layout)
-    return Hail
+    "返回构造结果"
+    Widget.setLayout(Layout)
+    return Widget

@@ -6,4 +6,3 @@ from .SettingsLib import *
 
 '扩展 Extend'
 from .HailLib import *
-from .IdleLib import *

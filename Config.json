@@ -5,7 +5,7 @@
             "zh-CN": "样式表",
             "en-US": "StyleSheet"
         },
-        "Info": "<font color=#ffffff>更改Windy的全局样式表<br><font color=#5e5e5e>此选项的更改将<font color=#00aaaa>立即生效</font><br><br>已知的错误: Menu的PushButton子组件只有重启才能更新样式",
+        "Info": "<font color=#ffffff>更改Windy的全局样式表<br><font color=#5e5e5e>此选项的更改将<font color=#00aaaa>立即生效</font><br><br>已知的错误: 设置项有<font color=#00aaaa>小概率</font>找到的parent是NoneType（甚至是我学编程以来第一次写出概率性错误）",
         "Items": [
             "Dark",
             "Dark_Pink"
@@ -24,7 +24,7 @@
             "zh-CN",
             "en-US"
         ],
-        "Selected": "en-US",
-        "SelectedIndex": 1
+        "Selected": "zh-CN",
+        "SelectedIndex": 0
     }
 }

@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt
 from Widgets.VComboBox import VComboBox
 import Scripts
 
-def createSettings(parent):
+def Settings(parent):
     "内置StackedWidget"
 
     def createItem(Type , Data: dict, parent:QWidget):
@@ -32,8 +32,7 @@ def createSettings(parent):
                 for css in CSSFile:
                     BG_CBox.addItem(css)
                 "更改样式表"
-                "找parent笑传之调调用"
-                BG_CBox.currentTextChanged.connect(lambda text: BG.parent().parent().parent().parent().parent().setStyleSheet(Scripts.MD_getStyleSheet(f"StyleSheets/{text}.css"))) # type: ignore
+                BG_CBox.currentTextChanged.connect(lambda text: BG.window().setStyleSheet(Scripts.MD_getStyleSheet(f"StyleSheets/{text}.css"))) # type: ignore
                 "更改并保存配置文件"
                 config[key]['Items'] = CSSFile
 
@@ -55,21 +54,21 @@ def createSettings(parent):
         if Type == 'ComboBox':
             return withComboBox()
 
-    Settings = QWidget(parent)
+    Widget = QWidget(parent)
 
     Layout = QVBoxLayout()
     if True:
 
         Toolbar = QHBoxLayout()
         if True:
-            SearchLine = QLineEdit(Settings)
+            SearchLine = QLineEdit(Widget)
             SearchLine.setPlaceholderText("搜索设置项...")
 
-            TypeFilter = VComboBox(Settings)
+            TypeFilter = VComboBox(Widget)
             TypeFilter.insertItem(0, "按首字母")
             TypeFilter.insertItem(1, "按类型")
 
-            OrderFilter = VComboBox(Settings)
+            OrderFilter = VComboBox(Widget)
             OrderFilter.insertItem(0, "正序")
             OrderFilter.insertItem(1, "倒序")
 
@@ -77,8 +76,8 @@ def createSettings(parent):
             Toolbar.addWidget(TypeFilter)
             Toolbar.addWidget(OrderFilter)
 
-        SettingsArea = QScrollArea(Settings)
-        SA_Widget, SA_Layout = QWidget(Settings), QVBoxLayout()
+        SettingsArea = QScrollArea(Widget)
+        SA_Widget, SA_Layout = QWidget(Widget), QVBoxLayout()
         SA_Widget.setProperty('Theme', 'Dark')
         SA_Widget.setObjectName("SA_Widget")
         SA_Widget.setMaximumWidth(930)
@@ -99,6 +98,6 @@ def createSettings(parent):
     Layout.addLayout(Toolbar)
     Layout.addWidget(SettingsArea)
 
-    Settings.setLayout(Layout)
-    return Settings
+    Widget.setLayout(Layout)
+    return Widget
 

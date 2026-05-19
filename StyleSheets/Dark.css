@@ -108,7 +108,6 @@ QLineEdit:focus {
     padding: 8px;
 }
 
-/* QScrollArea */
 QScrollArea {
     background-color: #242424;
     border-radius: 10px;
@@ -154,4 +153,8 @@ QGroupBox {
 }
 QGroupBox::title{
     color: #bf514e
+}
+
+QMessageBox {
+    background-color: #333333;
 }
