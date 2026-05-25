@@ -1,0 +1,9 @@
+{
+  "name": "hail",
+  "version": "1.0.0",
+  "description": "冰雹猜想计算/可视化",
+  "author": "Killerqubr",
+  "main": "main.py",
+  "entryPoint": "create_page",
+  "enabled": true
+}

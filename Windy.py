@@ -1,24 +1,29 @@
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QMainWindow, QPushButton,
-    QHBoxLayout, QLineEdit, QStackedWidget, QMessageBox, QDialog)
-from PyQt6.QtCore import QSize
-from PyQt6.QtGui import QIcon
-import StackedWidgets as SW
+    QHBoxLayout, QLineEdit, QStackedWidget, QStatusBar)
 import Scripts
+from Scripts.Signal import Signal_Manager
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 class Windy(QMainWindow):
     "传闻是*繁花世界*中一位心向意义和宇宙的开发者献给**自己**的礼物"
     "作者Killerqubr | 一个图形化的工具集"
 
-    __version__ = 'Beta 0.2/5.19'
+    __version__ = '0.4d5.24'
+    "重新构建了组件加载方法"
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        "初始化"
+        super().__init__(parent)
         self.setWindowTitle("Windy")
-        self.setFixedSize(1032, 639)
         # TODO 应添加大小自适应方法，按屏幕比例缩放
-
-        "基本Layout和Widget"
+        self.setFixedSize(1032, 639)
+        Scripts.ReadFontFile('Assests/XNSFengTangHaiYanWei.ttf')
+        self.initUI()
+        self.initPlugins()
+        self.initSignal()
+    
+    def initUI(self):
+        "加载UI"
         Layout = QVBoxLayout()
         Layout.setContentsMargins(0,0,0,0)
         Layout.setSpacing(0)
@@ -46,40 +51,43 @@ class Windy(QMainWindow):
         LoLayout = QHBoxLayout()
             
         self.StackWindow = QStackedWidget(self)
-        self.Menu = Scripts.Widget_Basic(parent=self, Name='Menu', FixedW=55, CSS="QWidget#Menu {border-right: 1px solid #5e5e5e;}", Prpt=('Theme','Dark'))
+        self.Menu = Scripts.Widget_Basic(parent=self, Name='Menu', MinW=55, CSS="QWidget#Menu {border-right: 1px solid #5e5e5e;}", Prpt=('Theme','Dark'))
         self.Menu_Layout = QVBoxLayout()
         self.Menu.setLayout(self.Menu_Layout)
                 
-        "创建按钮和界面"
-        self.createPage(SW.Settings(self), QIcon('Assests/whl.png'), parent=self, ISize=QSize(20,20))
-        #self.createPage(SW.Encryption(self), '码', parent=self)
-        self.createPage(SW.Hail(self), '冰', parent=self)
         self.Menu_Layout.addStretch(1)
 
         LoLayout.addWidget(self.Menu)   
         LoLayout.addWidget(self.StackWindow)
+        
+        self.Logging_StatBar = QStatusBar()
 
+        "设置主要布局"
         Layout.addLayout(HiLayout)
         Layout.addLayout(LoLayout)
+        Layout.addWidget(self.Logging_StatBar)
 
-    def createPage(self, Widget:QWidget, QB:QPushButton | str | QIcon, parent:QWidget | None = None, **kwargs) -> None:
-        "*工厂方法* 创建页面和按钮使其绑定并添加到布局"
-        self.StackWindow.addWidget(Widget) # 添加页面至StackedWidget
-        "接受的QB类型: QPushButton | str->仅文字 | QIcon->仅图标"
-        "接受的kwargs参数类型: [parent:QWidget, ISize:QSize]"
-        if isinstance(QB, str):
-            "文本最好只有一个字(考虑到按钮大小)"
-            QB = QPushButton(QB, parent)
-            QB.clicked.connect(lambda: self.StackWindow.setCurrentWidget(Widget))
-        elif isinstance(QB, QIcon):
-            # TODO 考虑到图标也可和文字一起做成"带图标的按钮"，故该分支可以优化兼容该组件的创建
-            QB = QPushButton(QB, '', parent)
-            QB.setIconSize(kwargs['ISize']) if 'ISize' in kwargs else None
-        else:
-            return
-        QB.clicked.connect(lambda: self.StackWindow.setCurrentWidget(Widget)) # 绑定信号
-        self.Menu_Layout.addWidget(QB) # 添加按钮至菜单栏
-        "致: 这个工厂方法使用了类内参数，请不要此方法移入其他文件"
+    def initPlugins(self):
+        "加载组件"
+        from Scripts.Plugin import PluginManager
+        mgr = PluginManager("Plugins")
+        plugin_funcs = mgr.Load()   # { "插件A": create_page函数, ... }
+
+        for name, create_page in plugin_funcs.items():
+            try:
+                page = create_page(self)          # 插件自己负责创建 QWidget
+                self.StackWindow.addWidget(page)
+                btn = QPushButton(name, self.Menu)
+                btn.clicked.connect(lambda _, p=page: self.StackWindow.setCurrentWidget(p))
+                self.Menu_Layout.addWidget(btn)
+            except Exception as e:
+                print(f"[插件] 创建页面失败 {name}: {e}")
+            self.Menu_Layout.addWidget(btn) # 添加按钮至菜单栏
+            "致: 这个工厂方法使用了类内参数，请不要此方法移入其他文件"
+            
+    def initSignal(self):
+        "绑定全局触发信号"
+        Signal_Manager.Logging_Stat.connect(lambda msg, t: self.Logging_StatBar.showMessage(msg, t))
             
     def mousePressEvent(self, a0) -> None:
         "重写运行时**鼠标点击**事件"

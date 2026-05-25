@@ -3,6 +3,5 @@
 '内置 Built-in'
 from .Lib import *
 from .SettingsLib import *
-
-'扩展 Extend'
-from .HailLib import *
+from .Plugin import PluginManager
+from .Signal import Signal_Manager

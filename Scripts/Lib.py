@@ -1,10 +1,18 @@
 "Windy用到的方法"
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
+from PyQt6.QtGui import QFont, QFontDatabase
 
 def ReadQSS(path:str) -> str:
     "读取并返回指定路径的样式表"
     with open(path, "r",encoding='utf-8') as f:
         return f.read()
+
+def ReadFontFile(path:str) -> QFont | None:
+    "读取并返回字体文件"
+    Id = QFontDatabase.addApplicationFont(path)
+    if Id != -1:
+        Name = QFontDatabase.applicationFontFamilies(Id)[0]
+        return QFont(Name)
     
 def Widget_Basic(parent:QWidget | None = None, **kwargs) -> QWidget:
     "*工厂方法* 通过参数创建最基本的QWidget组件"
@@ -14,6 +22,10 @@ def Widget_Basic(parent:QWidget | None = None, **kwargs) -> QWidget:
         Widget.setFixedHeight(kwargs['FixedH']) if 'FixedH' in kwargs else None
         Widget.setFixedWidth(kwargs['FixedW']) if 'FixedW' in kwargs else None
         Widget.setFixedSize(kwargs['FixedS']) if 'FixedS' in kwargs else None
+
+        Widget.setMinimumWidth(kwargs['MinW']) if 'MinW' in kwargs else None
+        Widget.setMinimumHeight(kwargs['MinH']) if 'MinH' in kwargs else None
+        Widget.setMinimumSize(kwargs['MinS']) if 'MinS' in kwargs else None
         
         Widget.setObjectName(kwargs['Name']) if 'Name' in kwargs else None
         Widget.setStyleSheet(kwargs['CSS']) if 'CSS' in kwargs else None

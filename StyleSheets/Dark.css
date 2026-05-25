@@ -4,7 +4,7 @@
 /* 全局样式 */
 * {
     font-family: "想念是枫糖海盐味", sans-serif;
-    font-size:17px;
+    font-size:13pt;
     color: white;
 }
 /* QStackedWidget */
@@ -153,8 +153,4 @@ QGroupBox {
 }
 QGroupBox::title{
     color: #bf514e
-}
-
-QMessageBox {
-    background-color: #333333;
 }

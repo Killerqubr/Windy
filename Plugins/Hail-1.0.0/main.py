@@ -4,16 +4,18 @@ from PyQt6.QtCore import QTimer
 import pyqtgraph as pg
 from random import randint
 from Widgets.VComboBox import VComboBox
-import Scripts
+import lib
 import time
+from Scripts.Signal import Signal_Manager
 
-def Hail(parent):
+def create_page(parent):
     "作者/页面设计 Killerqubr | 冰雹猜想计算器(炒冷饭说是)"
     Widget = QWidget(parent)
 
     def startup_Cal():
         if Flag_Accessable:
-
+ 
+            Signal_Manager.Logging_Stat.emit('Hail.py触发了信号！', 1000)
             StatusBar.setStyleSheet("color:#535353")
             StatusBar.showMessage(f"正在计算...")
             HailInput.setDisabled(True)
@@ -24,9 +26,9 @@ def Hail(parent):
             TStart = time.perf_counter()
             Result = {}
             if int(HailInput.text()) >= 1:
-                Result = Scripts.HailCal(float(HailInput.text()))
+                Result = lib.HailCal(float(HailInput.text()))
             elif int(HailInput.text()) <= -1:
-                Result = Scripts.HailCalN(float(HailInput.text()))
+                Result = lib.HailCalN(float(HailInput.text()))
             TFin = time.perf_counter()
             TElapsed = (TFin-TStart)*1000
 
